@@ -10,10 +10,12 @@ import Index from "./pages/Index";
 import Checkup from "./pages/Checkup";
 import Chat from "./pages/Chat";
 import Events from "./pages/Events";
+import EventsFood from "./pages/EventsFood";
 import Appointments from "./pages/Appointments";
 import FoodMap from "./pages/FoodMap";
 import Games from "./pages/Games";
 import MemoryCards from "./pages/MemoryCards";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
 
@@ -32,11 +34,12 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/checkup" element={<Checkup />} />
             <Route path="/chat" element={<Chat />} />
-            <Route path="/events" element={<Events />} />
+            <Route path="/events" element={<EventsFood />} />
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/food-map" element={<FoodMap />} />
             <Route path="/games" element={<Games />} />
             <Route path="/games/memory-cards" element={<MemoryCards />} />
+            <Route path="/profile" element={<Profile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

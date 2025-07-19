@@ -1,5 +1,5 @@
 
-import { Heart, MessageCircle, Calendar, Brain, Home, MapPin, Clock } from 'lucide-react';
+import { Heart, MessageCircle, Calendar, Brain, Home, Utensils, Clock } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const Navigation = () => {
@@ -7,9 +7,8 @@ const Navigation = () => {
     { path: '/', icon: Home, label: 'Home' },
     { path: '/checkup', icon: Heart, label: 'Checkup' },
     { path: '/chat', icon: MessageCircle, label: 'Chat' },
-    { path: '/events', icon: Calendar, label: 'Events' },
+    { path: '/events', icon: Calendar, label: 'Events & Food' },
     { path: '/appointments', icon: Clock, label: 'Appointments' },
-    { path: '/food-map', icon: MapPin, label: 'Food Map' },
     { path: '/games', icon: Brain, label: 'Games' },
   ];
 

@@ -4,7 +4,8 @@
 
 We have created an app that is catered towards the elderly, who fall under the ages of 65 and above. This app has many features that we have researched upon to cater towards their needs.
 
-Requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)sh
+Requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
 Follow these steps:
 
 ```sh

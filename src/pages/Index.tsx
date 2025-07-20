@@ -91,7 +91,7 @@ const Index = () => {
               <User size={32} />
             </Link>
             <div>
-              <h1 className="text-4xl font-bold text-white">CareConnect</h1>
+              <h1 className="text-4xl font-bold text-white">WeCare</h1>
               <p className="text-white/80 text-xl">GOOD MORNING</p>
             </div>
           </div>

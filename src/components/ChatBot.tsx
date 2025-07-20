@@ -16,7 +16,7 @@ const ChatBot = ({ onClose }: ChatBotProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Hello! I\'m your CareConnect assistant. How can I help you today? I can assist with health questions, medication reminders, appointment scheduling, and more.',
+      text: 'Hello! I\'m your WeCare assistant. How can I help you today? I can assist with health questions, medication reminders, appointment scheduling, and more.',
       sender: 'bot',
       timestamp: new Date(),
     },

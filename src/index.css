@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CareConnect Healthcare App Color Palette */
+/* WeCare Healthcare App Color Palette */
 @layer base {
   :root {
     --background: 248 250 252; /* Clean light gray */

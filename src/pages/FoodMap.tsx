@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { ArrowLeft, MapPin, Star, Clock, Phone, Navigation as NavIcon, Smile } from 'lucide-react';
+import { ArrowLeft, MapPin, Star, Clock, Phone, Navigation as NavIcon, Smile, Home, MessageCircle, Calendar, Utensils, Brain } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTextZoom } from "@/contexts/TextZoomContext";
+import TextZoomControls from "@/components/TextZoomControls";
 
 const FoodMap = () => {
+  const { textZoom } = useTextZoom();
   const [selectedLocation, setSelectedLocation] = useState('bedok');
 
   const locations = [
@@ -138,7 +141,9 @@ const FoodMap = () => {
   const foodSpots = getFoodSpotsForLocation(selectedLocation);
 
   return (
-    <div className="min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand]">
+    <>
+      <TextZoomControls />
+      <div className={`min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand] elderly-text-zoom-${textZoom}`} style={{fontSize: `${14 + textZoom * 2}px`}}>
       {/* Header */}
       <header className="bg-[#5E6472] p-6">
         <div className="flex items-center justify-between">
@@ -149,14 +154,6 @@ const FoodMap = () => {
             <div>
               <h1 className="text-3xl font-bold text-white">Foods</h1>
               <p className="text-white/80 text-lg">Foods near you</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-3 text-center">
-            <div className="text-[#5E6472] text-sm font-semibold">Text Size</div>
-            <div className="flex items-center justify-center space-x-2 mt-1">
-              <button className="w-6 h-6 bg-slate-300 rounded text-[#5E6472]">-</button>
-              <div className="w-6 h-6 bg-slate-100 rounded flex items-center justify-center text-[#5E6472] font-bold">3</div>
-              <button className="w-6 h-6 bg-slate-300 rounded text-[#5E6472]">+</button>
             </div>
           </div>
         </div>
@@ -248,29 +245,33 @@ const FoodMap = () => {
       </section>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 w-full bg-[#AED9E0] flex justify-around items-center p-4 rounded-t-3xl shadow-inner">
+      <nav className="fixed bottom-0 w-full bg-[#AED9E0] flex justify-around items-center p-6 rounded-t-3xl shadow-inner">
         <Link to="/" className="text-[#5E6472] text-center">
-          <Smile size={28} />
-          <p className="text-sm">Home</p>
+          <Home size={28} />
+          <p className="text-sm font-semibold">Home</p>
         </Link>
         <Link to="/chat" className="text-[#5E6472] text-center">
-          <Smile size={28} />
-          <p className="text-sm">Chats</p>
+          <MessageCircle size={28} />
+          <p className="text-sm font-semibold">Chats</p>
         </Link>
         <Link to="/appointments" className="text-[#5E6472] text-center">
           <Clock size={28} />
-          <p className="text-sm">Bookings</p>
+          <p className="text-sm font-semibold">Bookings</p>
         </Link>
-        <Link to="/food-map" className="text-[#5E6472] text-center">
-          <Smile size={28} />
-          <p className="text-sm">Food</p>
+        <Link to="/events" className="text-[#5E6472] text-center">
+          <div className="flex space-x-1">
+            <Calendar size={20} />
+            <Utensils size={20} />
+          </div>
+          <p className="text-sm font-semibold">Events & Food</p>
         </Link>
         <Link to="/games" className="text-[#5E6472] text-center">
-          <Star size={28} />
-          <p className="text-sm">Games</p>
+          <Brain size={28} />
+          <p className="text-sm font-semibold">Games</p>
         </Link>
       </nav>
     </div>
+    </>
   );
 };
 

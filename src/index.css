@@ -84,7 +84,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-size: 22px; /* Increased base font size for elderly on mobile */
+    font-size: 26px; /* Increased base font size for elderly on mobile */
     line-height: 1.7;
     /* Optimize for Android devices */
     -webkit-font-smoothing: antialiased;
@@ -97,7 +97,7 @@
   /* Android-specific optimizations */
   @media screen and (max-width: 768px) {
     body {
-      font-size: 18px;
+      font-size: 22px;
     }
   }
 
@@ -121,11 +121,11 @@
   }
 
   /* Text size magnification levels */
-  .elderly-text-zoom-1 { font-size: 18px !important; }
-  .elderly-text-zoom-2 { font-size: 20px !important; }
-  .elderly-text-zoom-3 { font-size: 22px !important; }
-  .elderly-text-zoom-4 { font-size: 24px !important; }
-  .elderly-text-zoom-5 { font-size: 26px !important; }
+  .elderly-text-zoom-1 { font-size: 22px !important; }
+  .elderly-text-zoom-2 { font-size: 24px !important; }
+  .elderly-text-zoom-3 { font-size: 26px !important; }
+  .elderly-text-zoom-4 { font-size: 28px !important; }
+  .elderly-text-zoom-5 { font-size: 30px !important; }
   
   .elderly-text-zoom-1 * { font-size: inherit !important; }
   .elderly-text-zoom-2 * { font-size: inherit !important; }
@@ -145,7 +145,7 @@
 @layer components {
   /* Elderly-friendly button styling with Android optimizations - Updated for wireframe */
   .elderly-button {
-    @apply px-6 py-4 text-lg font-semibold rounded-lg transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-ring touch-optimized border border-border;
+    @apply px-6 py-4 text-xl font-semibold rounded-lg transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-ring touch-optimized border border-border;
     min-height: 56px; /* Optimized touch target */
     min-width: 56px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -159,7 +159,7 @@
     .elderly-button {
       min-height: 64px;
       min-width: 64px;
-      font-size: 1.25rem;
+      font-size: 1.375rem;
       padding: 1.25rem 2rem;
     }
   }
@@ -181,34 +181,34 @@
   
   /* Elderly text sizing for maximum readability on mobile */
   .elderly-text {
-    @apply text-xl leading-relaxed;
+    @apply text-2xl leading-relaxed;
     font-weight: 500; /* Slightly bolder for better visibility */
   }
 
   @media screen and (max-width: 768px) {
     .elderly-text {
-      @apply text-lg leading-relaxed;
+      @apply text-xl leading-relaxed;
       font-weight: 600;
     }
   }
   
   .elderly-heading {
-    @apply text-4xl font-bold mb-4 leading-tight;
+    @apply text-5xl font-bold mb-4 leading-tight;
   }
 
   @media screen and (max-width: 768px) {
     .elderly-heading {
-      @apply text-3xl font-bold mb-3 leading-tight;
+      @apply text-4xl font-bold mb-3 leading-tight;
     }
   }
   
   .elderly-subheading {
-    @apply text-3xl font-semibold mb-3 leading-snug;
+    @apply text-4xl font-semibold mb-3 leading-snug;
   }
 
   @media screen and (max-width: 768px) {
     .elderly-subheading {
-      @apply text-2xl font-semibold mb-2 leading-snug;
+      @apply text-3xl font-semibold mb-2 leading-snug;
     }
   }
 

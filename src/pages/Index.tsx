@@ -16,18 +16,14 @@ import {
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
+import { useTextZoom } from "@/contexts/TextZoomContext";
+import TextZoomControls from "@/components/TextZoomControls";
 
 const Index = () => {
-  const [textZoom, setTextZoom] = useState(3);
+  const { textZoom } = useTextZoom();
   const [medicationTaken, setMedicationTaken] = useState(false);
   const { toast } = useToast();
 
-  const adjustTextSize = (increment) => {
-    setTextZoom((prev) => {
-      const newZoom = increment ? Math.min(prev + 1, 5) : Math.max(prev - 1, 1);
-      return newZoom;
-    });
-  };
 
   const handleMedicationTaken = () => {
     setMedicationTaken(!medicationTaken);
@@ -73,7 +69,7 @@ const Index = () => {
       title: 'Foods',
       description: 'Foods near you',
       icon: Utensils,
-      path: '/food-map',
+      path: '/events?tab=food',
     },
     {
       title: 'Games',
@@ -84,7 +80,9 @@ const Index = () => {
   ];
 
   return (
-    <div className={`min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand] elderly-text-zoom-${textZoom}`} style={{fontSize: `${14 + textZoom * 2}px`}}>
+    <>
+      <TextZoomControls />
+      <div className={`min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand] elderly-text-zoom-${textZoom}`} style={{fontSize: `${14 + textZoom * 2}px`}}>
       {/* Header */}
       <header className="bg-[#5E6472] p-6">
         <div className="flex items-center justify-between">
@@ -95,28 +93,6 @@ const Index = () => {
             <div>
               <h1 className="text-4xl font-bold text-white">CareConnect</h1>
               <p className="text-white/80 text-xl">GOOD MORNING</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-4 text-center">
-            <div className="text-slate-800 text-lg font-semibold">Text Size</div>
-            <div className="flex items-center justify-center space-x-3 mt-2">
-              <button
-                onClick={() => adjustTextSize(false)}
-                className="w-10 h-10 bg-slate-300 rounded-lg text-slate-800 text-xl font-bold hover:bg-slate-400 transition-colors"
-                disabled={textZoom === 1}
-              >
-                -
-              </button>
-              <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-800 font-bold text-lg">
-                {textZoom}
-              </div>
-              <button
-                onClick={() => adjustTextSize(true)}
-                className="w-10 h-10 bg-slate-300 rounded-lg text-slate-800 text-xl font-bold hover:bg-slate-400 transition-colors"
-                disabled={textZoom === 5}
-              >
-                +
-              </button>
             </div>
           </div>
         </div>
@@ -255,6 +231,7 @@ const Index = () => {
         </Link>
       </nav>
     </div>
+    </>
   );
 };
 

@@ -18,6 +18,7 @@ import MemoryCards from "./pages/MemoryCards";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
+import { TextZoomProvider } from "./contexts/TextZoomContext";
 
 const queryClient = new QueryClient();
 
@@ -27,9 +28,10 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+        <TextZoomProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/checkup" element={<Checkup />} />
@@ -58,8 +60,9 @@ const App = () => {
             <ChatBot onClose={() => setShowChatBot(false)} />
           )}
         </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+      </TextZoomProvider>
+    </TooltipProvider>
+  </QueryClientProvider>
   );
 };
 

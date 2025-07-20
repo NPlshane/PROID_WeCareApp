@@ -1,9 +1,12 @@
 
 import { useState } from 'react';
-import { ArrowLeft, Heart, Smile, Meh, Frown, ThumbsUp, MessageCircle, Clock, Brain } from 'lucide-react';
+import { ArrowLeft, Heart, Smile, Meh, Frown, ThumbsUp, MessageCircle, Clock, Brain, Home, Calendar, Utensils } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTextZoom } from "@/contexts/TextZoomContext";
+import TextZoomControls from "@/components/TextZoomControls";
 
 const Checkup = () => {
+  const { textZoom } = useTextZoom();
   const [selectedMood, setSelectedMood] = useState<string>('');
   const [surveyStep, setSurveyStep] = useState(0);
   const [surveyAnswers, setSurveyAnswers] = useState<string[]>([]);
@@ -47,7 +50,9 @@ const Checkup = () => {
   const completedSurvey = surveyAnswers.length === surveyQuestions.length && surveyAnswers.every(answer => answer);
 
   return (
-    <div className="min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand]">
+    <>
+      <TextZoomControls />
+      <div className={`min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand] elderly-text-zoom-${textZoom}`} style={{fontSize: `${14 + textZoom * 2}px`}}>
       {/* Header */}
       <header className="bg-[#5E6472] p-6">
         <div className="flex items-center space-x-4">
@@ -150,29 +155,33 @@ const Checkup = () => {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 w-full bg-[#AED9E0] flex justify-around items-center p-4 rounded-t-3xl shadow-inner">
+      <nav className="fixed bottom-0 w-full bg-[#AED9E0] flex justify-around items-center p-6 rounded-t-3xl shadow-inner">
         <Link to="/" className="text-[#5E6472] text-center">
-          <Smile size={28} />
-          <p className="text-sm">Home</p>
+          <Home size={28} />
+          <p className="text-sm font-semibold">Home</p>
         </Link>
         <Link to="/chat" className="text-[#5E6472] text-center">
           <MessageCircle size={28} />
-          <p className="text-sm">Chats</p>
+          <p className="text-sm font-semibold">Chats</p>
         </Link>
         <Link to="/appointments" className="text-[#5E6472] text-center">
           <Clock size={28} />
-          <p className="text-sm">Bookings</p>
+          <p className="text-sm font-semibold">Bookings</p>
         </Link>
-        <Link to="/food-map" className="text-[#5E6472] text-center">
-          <Smile size={28} />
-          <p className="text-sm">Food</p>
+        <Link to="/events" className="text-[#5E6472] text-center">
+          <div className="flex space-x-1">
+            <Calendar size={20} />
+            <Utensils size={20} />
+          </div>
+          <p className="text-sm font-semibold">Events & Food</p>
         </Link>
         <Link to="/games" className="text-[#5E6472] text-center">
           <Brain size={28} />
-          <p className="text-sm">Games</p>
+          <p className="text-sm font-semibold">Games</p>
         </Link>
       </nav>
     </div>
+    </>
   );
 };
 

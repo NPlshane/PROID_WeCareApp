@@ -1,12 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, Calendar, MapPin, Clock, Users, Star, Camera, Utensils } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
+import { useTextZoom } from "@/contexts/TextZoomContext";
+import TextZoomControls from "@/components/TextZoomControls";
 
 const EventsFood = () => {
+  const { textZoom } = useTextZoom();
+  const [searchParams] = useSearchParams();
   const [selectedTab, setSelectedTab] = useState('events');
   const [selectedLocation, setSelectedLocation] = useState('bedok');
   const { toast } = useToast();
+  
+  // Check for tab parameter on mount
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    if (tabParam === 'food') {
+      setSelectedTab('food');
+    }
+  }, [searchParams]);
   
   const locations = [
     { id: 'bedok', name: 'Bedok' },
@@ -151,7 +163,9 @@ const EventsFood = () => {
   const foodSpots = getFoodSpotsForLocation(selectedLocation);
 
   return (
-    <div className="min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand]" style={{fontSize: '18px'}}>
+    <>
+      <TextZoomControls />
+      <div className={`min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand] elderly-text-zoom-${textZoom}`} style={{fontSize: `${14 + textZoom * 2}px`}}>
       {/* Header */}
       <header className="bg-[#5E6472] p-6">
         <div className="flex items-center justify-between">
@@ -330,6 +344,7 @@ const EventsFood = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

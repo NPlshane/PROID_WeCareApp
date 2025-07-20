@@ -1,7 +1,9 @@
 
 import { useState, useEffect } from 'react';
-import { ArrowLeft, RotateCcw, Trophy, Timer, Target, Plus, Minus, MessageCircle, Clock, Brain, Calendar, Smile } from 'lucide-react';
+import { ArrowLeft, RotateCcw, Trophy, Timer, Target, Plus, Minus, MessageCircle, Clock, Brain, Calendar, Smile, Home, Utensils } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTextZoom } from "@/contexts/TextZoomContext";
+import TextZoomControls from "@/components/TextZoomControls";
 
 interface Card {
   id: number;
@@ -11,6 +13,7 @@ interface Card {
 }
 
 const MemoryCards = () => {
+  const { textZoom } = useTextZoom();
   const [cards, setCards] = useState<Card[]>([]);
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [matches, setMatches] = useState(0);
@@ -18,14 +21,6 @@ const MemoryCards = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameWon, setGameWon] = useState(false);
   const [time, setTime] = useState(0);
-  const [textZoom, setTextZoom] = useState(3);
-
-  const adjustTextSize = (increment: boolean) => {
-    setTextZoom((prev) => {
-      const newZoom = increment ? Math.min(prev + 1, 5) : Math.max(prev - 1, 1);
-      return newZoom;
-    });
-  };
 
   const cardValues = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼', '🌊', '⭐'];
 
@@ -134,7 +129,9 @@ const MemoryCards = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand]">
+    <>
+      <TextZoomControls />
+      <div className={`min-h-screen bg-[#FAF3DD] pb-24 font-[Quicksand] elderly-text-zoom-${textZoom}`} style={{fontSize: `${14 + textZoom * 2}px`}}>
       {/* Header */}
       <header className="bg-[#5E6472] p-6">
         <div className="flex items-center justify-between">
@@ -154,28 +151,6 @@ const MemoryCards = () => {
             >
               <RotateCcw size={28} />
             </button>
-            <div className="bg-white rounded-xl p-3 text-center">
-              <div className="text-slate-800 text-sm font-semibold">Text Size</div>
-              <div className="flex items-center justify-center space-x-2 mt-1">
-                <button
-                  onClick={() => adjustTextSize(false)}
-                  className="w-6 h-6 bg-slate-300 rounded text-slate-800"
-                  disabled={textZoom === 1}
-                >
-                  -
-                </button>
-                <div className="w-6 h-6 bg-slate-100 rounded flex items-center justify-center text-slate-800 font-bold">
-                  {textZoom}
-                </div>
-                <button
-                  onClick={() => adjustTextSize(true)}
-                  className="w-6 h-6 bg-slate-300 rounded text-slate-800"
-                  disabled={textZoom === 5}
-                >
-                  +
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </header>
@@ -258,30 +233,34 @@ const MemoryCards = () => {
         </div>
       </main>
 
-      {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 w-full bg-[#AED9E0] flex justify-around items-center p-4 rounded-t-3xl shadow-inner">
+      {/* Bottom Nav */}
+      <nav className="fixed bottom-0 w-full bg-[#AED9E0] flex justify-around items-center p-6 rounded-t-3xl shadow-inner">
         <Link to="/" className="text-[#5E6472] text-center">
-          <Smile size={28} />
-          <p className="text-sm">Home</p>
+          <Home size={28} />
+          <p className="text-sm font-semibold">Home</p>
         </Link>
         <Link to="/chat" className="text-[#5E6472] text-center">
           <MessageCircle size={28} />
-          <p className="text-sm">Chats</p>
+          <p className="text-sm font-semibold">Chats</p>
         </Link>
         <Link to="/appointments" className="text-[#5E6472] text-center">
           <Clock size={28} />
-          <p className="text-sm">Bookings</p>
+          <p className="text-sm font-semibold">Bookings</p>
         </Link>
-        <Link to="/food-map" className="text-[#5E6472] text-center">
-          <Smile size={28} />
-          <p className="text-sm">Food</p>
+        <Link to="/events" className="text-[#5E6472] text-center">
+          <div className="flex space-x-1">
+            <Calendar size={20} />
+            <Utensils size={20} />
+          </div>
+          <p className="text-sm font-semibold">Events & Food</p>
         </Link>
         <Link to="/games" className="text-[#5E6472] text-center">
           <Brain size={28} />
-          <p className="text-sm">Games</p>
+          <p className="text-sm font-semibold">Games</p>
         </Link>
       </nav>
     </div>
+    </>
   );
 };
 
